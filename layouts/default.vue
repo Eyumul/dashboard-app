@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <p class="font-anton">this will apperar on all pages by default</p>
+    <div class="min-h-screen bg-gray-100">
         <slot/>
     </div>
 </template>
@@ -10,6 +9,6 @@
 
 <style>
 body {
-    @apply font-pop
+    @apply font-rob
 }
 </style>
