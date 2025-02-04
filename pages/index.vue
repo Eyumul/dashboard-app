@@ -8,7 +8,7 @@
                 <icon class="text-xl" name="uil:plus-circle"/>
                 <p>Add Member</p>
             </button>
-            <MemberForm/>
+            <AddMemberForm/>
         </div>
         <div class="flex flex-col gap-4 items-center overflow-x-auto pb-24 w-[90%] mb-12">
             <table class="table table-zebra bg-white">
@@ -30,28 +30,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="tableData of data" :key="tableData.id">
-                        <th>{{ tableData.id }}</th>
-                        <td>{{ tableData.name }}</td>
-                        <td>{{ tableData.email }}</td>
-                        <td>{{ tableData.age }}</td>
-                        <td>{{ tableData.salary }}</td>
-                        <td>{{ tableData.position }}</td>
-                        <td>{{ tableData.surety }}</td>
+                    <tr v-for="member of members" :key="member._id">
+                        <th>{{ member._id }}</th>
+                        <td>{{ member.name }}</td>
+                        <td>{{ member.email }}</td>
+                        <td>{{ member.age }}</td>
+                        <td>{{ member.salary }}</td>
+                        <td>{{ member.position }}</td>
+                        <td>{{ member.surety }}</td>
                         <td class="text-center">
-                            <a :href="tableData.suretyDocument" target="_blank">
+                            <a :href="member.suretyDocument" target="_blank">
                                 <icon name="uil:file-alt" class="text-xl"/>
                             </a>
                         </td>
                         <td class="text-center">
-                            <a :href="tableData.educationalDocument" target="_blank">
+                            <a :href="member.educationalDocument" target="_blank">
                                 <icon name="uil:file-alt" class="text-xl"/>
                             </a>
                         </td>
-                        <td>{{ tableData.codeNumber }}</td>
-                        <td>{{ tableData.status }}</td>
+                        <td>{{ member.codeNumber }}</td>
+                        <td>{{ member.status }}</td>
                         <td class="flex justify-center">
-                            <DropdownMenu :onEdit="handleEdit" :onDelete="handleDelete" :data="tableData" />
+                            <DropdownMenu :onDelete="handleDelete" :data="member._id" />
                         </td>
                     </tr>
                 </tbody>
@@ -66,15 +66,19 @@
     </div>
 </template>
 <script setup>
-import { useMemberData } from "~/composables/useMemberData";
-const { data } = useMemberData();
+import { ref, onMounted } from 'vue';
+  import { useMembers } from '~/composables/useMembers';
+  
+  const { members, fetchMembers, deleteMember } = useMembers();
+  
+  await fetchMembers();
+//   onMounted(async () => {
+//   });
+  
 
-// Handle edit and delete actions, now accepting the data parameter
-const handleEdit = (data) => {
-  alert("Editing member: " + data.id); // Replace with your actual edit logic
-};
-
-const handleDelete = (data) => {
-  alert("Deleting member: " + data.id); // Replace with your actual delete logic
-};
+  
+  const handleDelete = async (id) => {
+    await deleteMember(id);
+    console.log("member with id: " + id + " is deleted")
+  };
 </script>
