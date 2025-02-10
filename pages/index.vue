@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col gap-12 items-center">
-        <NavSectoin class="sticky top-0 z-50"/>
+        <NavSection class="sticky top-0 z-50"/>
         <Slideshow/>
         <div class="flex w-[90%]">
             <p class="text-4xl font-bold">Members</p>
@@ -73,6 +73,12 @@
                 </div>
             </dialog>
         </div>
+        <div class="flex">
+            <label class="input input-bordered flex items-center gap-2">
+                <input type="text" class="grow" placeholder="Search" />
+                <icon name="uil:search"/>
+            </label>
+        </div>
         <div class="flex flex-col gap-4 items-center overflow-x-auto pb-24 w-[90%] mb-12">
             <table class="table table-zebra bg-white">
                 <!-- head -->
@@ -136,6 +142,7 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
+import NavSection from '~/components/nav-section.vue';
   import { useMembers } from '~/composables/useMembers';
   
   

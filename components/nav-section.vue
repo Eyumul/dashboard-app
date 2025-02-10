@@ -1,7 +1,7 @@
 <template>
     <div class="navbar shadow-sm w-full bg-base-100">
         <div class="flex-1">
-            <a class="btn btn-ghost font-black text-[#0000ff] text-2xl">Med Tech</a>
+            <a class="btn btn-ghost font-black text-[#0000ff] text-2xl">Dashboard app</a>
         </div>
         <div class="flex-none gap-4 mr-8">
             <button class="btn btn-outline btn-sm">Logout</button>
